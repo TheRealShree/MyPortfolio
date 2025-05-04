@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Portfolio </title>
+  <style>
+    /* Global Styles */
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom right, #e3f2fd, #ffffff);
+      color: #1e1e2f;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: rgba(30, 30, 47, 0.95);
+      backdrop-filter: blur(10px);
+      color: #fff;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      position: relative;
+      font-weight: bold;
+    }
+
+    nav ul li a::after {
+      content: '';
+      display: block;
+      height: 2px;
+      width: 100%;
+      background: #536dfe;
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    nav ul li a:hover::after {
+      transform: scaleX(1);
+    }
+
+    .hero {
+      padding: 4rem 2rem;
+      text-align: center;
+      background: linear-gradient(135deg, #5c6bc0, #7e57c2);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .hero img {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      border: 5px solid #fff;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      margin-bottom: 1rem;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.75rem 1.5rem;
+      background: #fff;
+      color: #5c6bc0;
+      border: none;
+      cursor: pointer;
+      border-radius: 30px;
+      transition: background 0.3s ease;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .btn:hover {
+      background: #d1c4e9;
+    }
+
+    .section {
+      padding: 4rem 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .section h2 {
+      margin-bottom: 1rem;
+      position: relative;
+      font-size: 2rem;
+      text-align: center;
+    }
+
+    .section h2::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 4px;
+      background: #536dfe;
+      margin: 8px auto 0;
+    }
+
+    /* About Me Section */
+    #about {
+      background: #f5f5f5;
+      padding: 3rem 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      margin-top: 2rem;
+    }
+
+    #about h2 {
+      color: #536dfe;
+    }
+
+    #about p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+    }
+
+    /* Skills Section */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+      text-align: center;
+    }
+
+    .skill {
+      padding: 2rem;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(92, 107, 192, 0.15);
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .skill:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(83, 109, 254, 0.3);
+    }
+
+    .skill h3 {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      color: #536dfe;
+    }
+
+    .skill img {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 1rem;
+    }
+
+    .progress-bar {
+      width: 100%;
+      background: #e3e3e3;
+      border-radius: 10px;
+      overflow: hidden;
+      height: 10px;
+      margin-bottom: 0.5rem;
+    }
+
+    .progress {
+      height: 100%;
+      width: 0;
+      transition: width 1s ease-in-out;
+      border-radius: 10px;
+    }
+
+    .cpp { background: #ff7043; width: 60%; }
+    .java { background: #42a5f5; width: 60%; }
+    .python { background: #ffca28; width: 70%; }
+
+    .skill p {
+      font-weight: bold;
+      color: #536dfe;
+    }
+
+    /* Projects Section */
+    #projects {
+      padding: 4rem 2rem;
+      background: linear-gradient(135deg, #81c784, #66bb6a);
+      color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      margin-top: 3rem;
+    }
+
+    #projects h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      text-align: center;
+    }
+
+    .project {
+      padding: 1.5rem;
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .project:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(83, 109, 254, 0.3);
+    }
+
+    .project h3 {
+      margin-bottom: 1rem;
+      color: #536dfe;
+    }
+
+    .project p {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .project a {
+      color: #ffffff;
+      background-color: #536dfe;
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .project a:hover {
+      background-color: #3e51b5;
+    }
+
+    /* Contact Section */
+    #contact {
+      background: #fff;
+      padding: 4rem 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .contact-links {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+
+    .contact-links a {
+      font-size: 1.5rem;
+      color: #536dfe;
+      text-decoration: none;
+      transition: transform 0.3s;
+    }
+
+    .contact-links a:hover {
+      transform: scale(1.2);
+    }
+
+    .contact-links i {
+      margin-right: 0.5rem;
+    }
+
+    @media (max-width: 600px) {
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: #1e1e2f;
+      color: #fff;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <h2>MyPortfolio</h2>
+    <nav>
+      <ul>
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+    <img src="photo.jpg" alt="Profile Photo" />
+    <h1>Hello, I'm Shree Joshi </h1>
+    <p>A passionate developer building modern web experiences.</p>
+    <a href="#projects" class="btn">See My Work</a>
+  </section>
+
+  <!-- About Me Section -->
+  <section id="about">
+    <h2>About Me</h2>
+    <p>
+        I am a dedicated software developer with a passion for creating innovative web solutions. I enjoy tackling complex challenges and collaborating with others to build impactful products, with a focus on Java development and cybersecurity. Currently, I am pursuing my third year of college, specializing in computer science, and I am deeply interested in cybersecurity and Java development.
+      </p>
+      
+  </section>
+
+  <!-- Skills Section -->
+  <section class="section" id="skills">
+    <h2>Skills</h2>
+    <div class="skills-grid">
+      <div class="skill">
+        <img src="https://img.icons8.com/color/48/000000/c-plus-plus-logo.png" alt="C++ Icon" />
+        <h3>C++</h3>
+        <div class="progress-bar">
+          <div class="progress cpp"></div>
+        </div>
+        <p>60%</p>
+      </div>
+      <div class="skill">
+        <img src="java.png" alt="Java " />
+        <h3>Java</h3>
+        <div class="progress-bar">
+          <div class="progress java"></div>
+        </div>
+        <p>65%</p>
+      </div>
+      <div class="skill">
+        <img src="https://img.icons8.com/color/48/000000/python.png" alt="Python Icon" />
+        <h3>Python</h3>
+        <div class="progress-bar">
+          <div class="progress python"></div>
+        </div>
+        <p>70%</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="project-grid">
+
+      <div class="project">
+        <h3>Project 1</h3>
+        <h3>[python]</h3>
+        <p>Description of project 1 goes here.</p>
+        <a href="#">Flappy Bird Multiplayer  </a>
+      </div>
+      <div class="project">
+        <h3>Project 2</h3>
+        <h3>[java]</h3>
+        <p>Description of project 2 goes here.</p>
+        <a href="#">Weather Report </a>
+      </div>
+      <div class="project">
+        <h3>Project 3</h3>
+        <h3>[python]</h3>
+        <p>Description of project 3 goes here.</p>
+        <a href="#">Virtual Mouse </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <h2>Contact Me
+    </h2>
+    <h2>
+        Email: Shreejoshi118@gmail.com
+    </h2>
+    
+    <div class="contact-links">
+      <a href="https://github.com/TheRealShree" target="_blank">
+        <i class="fab fa-github"></i> GitHub
+      </a>
+      <a href="https://www.linkedin.com/feed/" target="_blank">
+        <i class="fab fa-linkedin"></i> LinkedIn
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Your Name. All rights reserved.</p>
+  </footer>
+
+  <!-- Font Awesome (for GitHub and LinkedIn icons) -->
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</body>
+</html>
